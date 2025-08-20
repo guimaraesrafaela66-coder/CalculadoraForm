@@ -16,5 +16,10 @@ namespace CalculadoraForm
         {
             InitializeComponent();
         }
+
+        private void btn7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
