@@ -21,10 +21,27 @@ namespace CalculadoraForm
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            // Implementar depois...
-        }
+            
+            try
+            {
+                txbTela.Text = new DataTable().Compute(txbTela.Text, null).ToString();
+                if (txbTela.Text == "∞")
+                {
+                    btnLimpar.PerformClick();
+                    MessageBox.Show("OPeração invalida", "ERRO",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+              }
 
-        private void numero_Clik(object sender, EventArgs e)
+            catch 
+            {
+                btnLimpar.PerformClick();
+                MessageBox.Show("impossível dividir por zero", "ERRO",
+                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            }
+private void numero_Clik(object sender, EventArgs e)
         {
             // Obter o botão que está chamando esse evento:
             Button botaoclicado = (Button)sender;
@@ -40,14 +57,24 @@ namespace CalculadoraForm
             // Verificar se o operador ainda não foi clicado:
             if (operadorClicado == false)
             {
-            // Obter o botão que está chamando esse evento:
-            Button botaoclicado = (Button)sender;
+                // Obter o botão que está chamando esse evento:
+                Button botaoclicado = (Button)sender;
 
-            // Adicionar o Text do botão clicado no TextBox:
-            txbTela.Text += botaoclicado.Text;
+                // Adicionar o Text do botão clicado no TextBox:
+                txbTela.Text += botaoclicado.Text;
 
-            // Mudar o operadorClicado pra true :
+                // Mudar o operadorClicado pra true (levantar a bandeirinha):
+                operadorClicado = true;
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            // Limpar a tela:
+            txbTela.Text = "";
+            // Voltar o operador clicado para true:
             operadorClicado = true;
+
         }
     }
 }
